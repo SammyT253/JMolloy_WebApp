@@ -23,7 +23,7 @@ namespace JMolloy.Controllers
             }
             catch(Exception e)
             {
-                throw new Exception("******ERROR IN BOOKS CONTROLLER INDEX METHOD!", e);
+                throw new Exception("BOOKS CONTROLLER, INDEX METHOD", e);
             }
             
         }
