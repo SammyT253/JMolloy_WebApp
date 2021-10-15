@@ -15,14 +15,16 @@ namespace JMolloy
     public class Startup
     {
         private IConfiguration Configuration { get; }
+        private IWebHostEnvironment _env;
+        string AppBasepath = string.Empty;
+        string AppRootpath = string.Empty;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
-           /* var configurationBuilder = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", true, false);
-
-            Configuration = configurationBuilder.Build();*/
+            _env = env;
+            AppBasepath = _env.WebRootPath;
+            AppRootpath = _env.ContentRootPath;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -31,8 +33,8 @@ namespace JMolloy
             //services.AddMvc();
             services.AddControllersWithViews();
             services.AddDbContext<BookDbContext>(options =>
-            options.UseSqlite(
-                Configuration.GetConnectionString("SQLiteConnection")));
+            options.UseSqlite(                      //Directory/
+                Configuration.GetConnectionString("DefaultConnection")));
             
             // options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
             services.AddScoped<IBookRepository, DbBookRepository>();

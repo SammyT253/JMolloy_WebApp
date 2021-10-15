@@ -14,14 +14,14 @@ namespace JMolloy
         }
 
         //Development Code
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+      /*  public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                });*/
         //Production Code
-       /* public static IHostBuilder CreateHostBuilder(string[] args) =>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
@@ -29,6 +29,6 @@ namespace JMolloy
                         .UseContentRoot(Directory.GetCurrentDirectory())
                         .UseUrls("http://*:5000")
                         .UseStartup<Startup>();
-                });*/
+                });
     }
 }
