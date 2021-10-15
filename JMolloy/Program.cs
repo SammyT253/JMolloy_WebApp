@@ -13,22 +13,22 @@ namespace JMolloy
             CreateHostBuilder(args).Build().Run();
         }
 
-        //Development Code
-      /*  public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });*/
-        //Production Code
+        //Development Code/Windows deployment
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseKestrel()
-                        .UseContentRoot(Directory.GetCurrentDirectory())
-                        .UseUrls("http://*:5000")
-                        .UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>();
                 });
+        //Production Code
+        /*  public static IHostBuilder CreateHostBuilder(string[] args) =>
+              Host.CreateDefaultBuilder(args)
+                  .ConfigureWebHostDefaults(webBuilder =>
+                  {
+                      webBuilder.UseKestrel()
+                          .UseContentRoot(Directory.GetCurrentDirectory())
+                          .UseUrls("http://*:5000")
+                          .UseStartup<Startup>();
+                  });*/
     }
 }

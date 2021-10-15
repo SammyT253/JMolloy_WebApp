@@ -1,17 +1,17 @@
-name: Build and deploy .NET Core application to Web App AppService-Linux-JMolloy
+name: Build and deploy .NET Core application to Web App WebappWindowsJMolloy
 on:
   push:
     branches:
     - Dev
 env:
-  AZURE_WEBAPP_NAME: AppService-Linux-JMolloy
-  AZURE_WEBAPP_PACKAGE_PATH: JMolloy/published
+  AZURE_WEBAPP_NAME: WebappWindowsJMolloy
+  AZURE_WEBAPP_PACKAGE_PATH: JMolloy\published
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 5.0.x
   WORKING_DIRECTORY: JMolloy
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET Core
@@ -30,7 +30,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       with:
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.APPSERVICE_LINUX_JMOLLOY_FFFF }}
+        publish-profile: ${{ secrets.WEBAPPWINDOWSJMOLLOY_FFFF }}
         package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
     - name: Publish Artifacts
       uses: actions/upload-artifact@v1.0.0
