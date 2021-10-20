@@ -4,27 +4,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using JMolloy.Models;
-using Microsoft.EntityFrameworkCore;
 using JMolloy.Services;
-using System;
-using System.IO;
-using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 
 namespace JMolloy
 {
     public class Startup
     {
         private IConfiguration Configuration { get; }
-        private IWebHostEnvironment _env;
-        string AppBasepath = string.Empty;
-        string AppRootpath = string.Empty;
 
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _env = env;
-            AppBasepath = _env.WebRootPath;
-            AppRootpath = _env.ContentRootPath;
+            /* var configurationBuilder = new ConfigurationBuilder()
+                 .AddJsonFile("appsettings.json", true, false);
+
+             Configuration = configurationBuilder.Build();*/
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -35,8 +30,6 @@ namespace JMolloy
             services.AddDbContext<BookDbContext>(options =>
             options.UseSqlite(                      //Directory/
                 Configuration.GetConnectionString("DefaultConnection")));
-            
-            // options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection")));
             services.AddScoped<IBookRepository, DbBookRepository>();
         }
 
@@ -47,7 +40,7 @@ namespace JMolloy
             {
                 app.UseDeveloperExceptionPage();
             }
-           //Configure for production! (avoid chaning startup settings from prod to env) if (env.IsProduction)
+           //Configure for production! (avoid changing startup settings from prod to env) if (env.IsProduction)
             else
             {
                 app.UseExceptionHandler("/Home/Error");

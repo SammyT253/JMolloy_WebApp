@@ -6,29 +6,30 @@ namespace JMolloy
 {
     public class Program
     {
-        //attempt at auto-selecting the right code based on environment
+        //update to auto-selecting the right code based on environment
 
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
         }
 
-        //Development Code/Windows deployment
-       /* public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });*/
-        //Production Code
+        //Development/windows prod config
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseKestrel()
-                        .UseContentRoot(Directory.GetCurrentDirectory())
-                        .UseUrls("http://*:5000")
-                        .UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>();
                 });
+        //Configuration for Kestrel with apache/nginx reverse proxy on Linux
+
+        /*   public static IHostBuilder CreateHostBuilder(string[] args) =>
+               Host.CreateDefaultBuilder(args)
+                   .ConfigureWebHostDefaults(webBuilder =>
+                   {
+                       webBuilder.UseKestrel()
+                           .UseContentRoot(Directory.GetCurrentDirectory())
+                           .UseUrls("http://*:5000")
+                           .UseStartup<Startup>();
+                   });*/
     }
 }
