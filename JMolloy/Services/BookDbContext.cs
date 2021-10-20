@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using JMolloy.Models.Entities;
+﻿using JMolloy.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace JMolloy.Models
 {
@@ -8,6 +8,6 @@ namespace JMolloy.Models
         public BookDbContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet <Book> Books { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }
